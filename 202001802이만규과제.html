@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>빅데이터</title>
+    <style>
+        #fixed {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            padding: 5px;
+            background-color: white;
+        }
+        
+        body {
+            background-color: aliceblue;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        div {
+            transition: font-size 5s;
+        }
+        
+        div:hover {
+            font-size: 200%;
+        }
+        
+        .header {
+            width: 100%;
+            height: 15%;
+        }
+        
+        .section {
+            width: 75%;
+            height: 70%;
+            float: left;
+        }
+        
+        .aside {
+            width: 22%;
+            height: 70%;
+            float: left;
+        }
+        
+        .footer {
+            width: 100%;
+            height: 15%;
+            clear: both;
+        }
+    </style>
+    <script>
+        function load(URL) {
+            window.open(URL, "mywin", "left = 300, top=300, width = 1500, height=800");
+        }
+        var colors = ["blue", "green", "yellow", "magenta", "red"];
+        var canvas;
+        var context;
+        var inputObjs;
+        var h3;
+
+        function init() {
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            inputObjs = document.getElementsByClassName("num");
+            h3 = document.getElementById("h3");
+
+            h3.onmouseover = function() {
+                this.style.color = "blue";
+            }
+
+            h3.addEventListener("mouseout", function() {
+                this.style.color = "black";
+            });
+        }
+
+        function drawChart() {
+            var total = 0;
+            for (var i = 0; i < inputObjs.length; i++) {
+                var n = parseInt(inputObjs[i].value);
+                if (isNaN(n) | n <= 0)
+                    inputObjs[i].value = 0;
+                else
+                    total += parseInt(inputObjs[i].value);
+            }
+
+            if (total == 0)
+                return;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            var x = canvas.width / 2;
+            var y = canvas.height / 2;
+            var small = (x < y) ? x : y;
+            var radius = small - 20;
+            var startAngle = 0;
+            var endAngle = 0;
+            for (var i = 0; i < inputObjs.length; i++) {
+                var n = parseInt(inputObjs[i].value);
+                if (n == 0)
+                    continue;
+                var rad = 2 * Math.PI * n / total;
+                endAngle = startAngle + rad;
+
+                context.beginPath();
+                context.moveTo(x, y);
+                context.arc(x, y, radius, startAngle, endAngle);
+                context.closePath();
+
+                context.strokeStyle = colors[i];
+                context.fillStyle = colors[i];
+                context.fill();
+                context.stroke();
+                startAngle = endAngle;
+            }
+        }
+
+        function change() {
+            var spanArray = document.getElementsByTagName("span");
+            for (var i = 0; i < spanArray.length; ++i) {
+                var span = spanArray[i];
+                span.style.color = "blue";
+            }
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <header class="header">
+        <h2>빅데이터</h2>
+    </header>
+    <hr>
+    <section class="section">
+        <article style="border: 2px solid; margin: 5px;">
+            <h3 id="h3">빅데이터<button onclick="change()">중요단어</button></h3>
+            <hr>
+            <p>
+                빅데이터의 공통적 특징은 3V로 설명할 수 있다. 속도는 대용량의 데이터를 빠르게 처리하고 분석할 수 있는 속성이다. 융복합 환경에서 디지털 데이터는 매우 빠른 속도로 생산되므로 이를 실시간으로 저장, 유통, 수집, 분석처리가 가능한 성능을 의미한다.
+                <span>다양성(Variety)</span>은 다양한 종류의 데이터를 의미하며 정형화의 종류에 따라 정형, 반정형, 비정형 데이터로 분류할 수 있다. 빅데이터의 특징은 3V로 요약하는 것이 일반적이다. 즉 데이터의 <span>양(Volume)</span>, <span>데이터 생성 속도(Velocity)</span>, 형태의 <span>다양성(Variety)</span>을 의미한다. 최근에는 <span>가치(Value)</span>나
+                <span>복잡성(Complexity)</span>을 덧붙이기도 한다. 이처럼 다양하고 방대한 규모의 데이터는 미래 경쟁력의 우위를 좌우하는 중요한 자원으로 활용될 수 있다는 점에서 주목받고 있다. 대규모 데이터를 분석해서 의미있는 정보를 찾아내는 시도는 예전에도 존재했다. 그러나 현재의 빅데이터 환경은 과거와 비교해 데이터의 양은 물론 질과 다양성 측면에서 패러다임의 전환을 의미한다. 이런 관점에서 빅데이터는 산업혁명
+                시기의 석탄처럼 IT와 스마트혁명 시기에 혁신과 경쟁력 강화, 생산성 향상을 위한 중요한 원천으로 간주되고 있다.
+                <span>데이터 생성 속도(Velocity)</span>은 다양한 형태의 데이터를 포함하는 것을 뜻한다. 정형 데이터 뿐만 아니라 사진, 오디오, 비디오, 소셜 미디어 데이터, 로그 파일 등과 같은 비정형 데이터도 포함된다.
+            </p>
+        </article>
+        <article style="border: 2px solid; margin: 5px;">
+            <h3>
+                빅데이터 관련 자격증
+            </h3>
+            <br>
+            <h4>국가기술 빅데이터 분석기사</h4>
+            <p>
+                빅데이터 이해를 기반으로 빅데이터 분석 기획, 빅데이터 수집, 저장, 처리, 빅데이터 분석 및 시각화를 수행하는 자격증으로 시험은 필기 4과목, 실기 1과목으로 총 과목이 5과목으로 이루어져 있다.
+            </p><br>
+            <h4>국가공인 데이터아키텍처 전문가 DAP</h4>
+            <p>
+                효과적인 데이터아키텍처 구축을 위해 전사아키텍처와 데이터품질관리에 대한 지식을 바탕으로 데이터 요건분석, 데이터 표준화, 데이터 모델링, 데이터베이스 설계와 이용 등의 직무를 수행하는 자격증으로 시험은 6과목으로 필기 100문항과 실기 1문항으로 이루어져있다.
+            </p><br>
+            <h4>데이터아키텍처 준전문가 DAsP</h4>
+            <p>
+                효과적인 데이터아키텍처 구축을 위해 데이터 요건 분석, 데이터 표준화, 데이터 모델링, 데이터베이스 설계와 이용 등의 직무를 수행하는 자격증으로 시험은 필기 객관식 50문항으로 이루어져 있다.
+            </p><br>
+            <h4>국가공인 데이터분석 전문가 ADP</h4>
+            <p>
+                데이터 이해 및 처리 기술에 대한 기본지식을 바탕으로 데이터분석 기획, 데이터분석, 데이터 시각화 업무를 수행하고 이를 통해 프로세스 혁신 및 마케팅 전략 결정 등의 과학적 의사결정을 지원하는 직무를 수행하는 자격증으로 시험은 필기 4과목, 실기 1과목 총 5과목으로 1차 필기 객관식 80문항, 서술형 1문항, 2차 실기 데이터분석 실무로 이루어져 있다.
+            </p><br>
+            <h4>국가공인 데이터분석 준전문가 ADsP</h4>
+            <p>
+                데이터 이해에 대한 기본지식을 바탕으로 데이터분석 기획 및 데이터분석 등의 직무를 수행하는 자격증으로 시험은 필기 객관식 40문항, 단답형 10문항으로 이루어져 있다.
+            </p><br>
+            <h4>국가공인 SQL 전문가</h4>
+            <p>
+                데이터베이스와 데이터모델링에 대한 지식을 바탕으로 데이터를 조작하고 추출하는데 있어서 정확하고 최적의 성능을 발휘하는 SQL을 작성할 수 있고, 이를 토대로 SQL을 내포하는 데이터베이스 프로그램이나 응용 소프트웨어의 성능을 최적화하거나, 이러한 성능 최척화를 지원할 수 있는 데이터베이스 개체(뷰, 인덱스 등)의 설계와 구현등의 직무를 수행하는 자격증으로 총 3과목으로 필기 70문항, 실기 2문항으로 이루어져 있다.
+            </p><br>
+            <h4>국가공인 SQL 개발자</h4>
+            <p>
+                데이터베이스와 데이터 모델링에 대한 지식을 바탕으로 응용 소프트웨어를 개발하면서 데이터를 조작하고 추출하는데 있어서 정확하고 최적의 성능을 발휘하는 SQL을 작성하는 자격증으로 시험은 총 2과목으로 필기 문항으로 이루어져 있다.
+            </p><br> 자세한 내용은 <a href="javascript:load('https://www.dataq.or.kr/www/main.do')">자격증 사이트</a>을 참고
+        </article>
+        <article style="border: 2px solid; margin: 5px;">
+            <h3>공부 중점</h3>
+            코드 공부(blue)<input type="number" id="a" class="num" value="0"> 툴 라이브러리 공부(green)<input type="number" id="b" class="num" value="0"><br> 관련 서적 읽기(yellow)<input type="number" id="c" class="num" value="0"><br> 관련 공모전 나가기(magenta)<input type="number"
+                id="d" class="num" value="0"><br> 관련 프로젝트 진행하기(red)<input type="number" id="e" class="num" value="0">
+            <input type="button" value="차트그리기" onclick="drawChart()"><br>
+            <canvas id="canvas" style="background-color:aliceblue"></canvas>
+        </article>
+    </section>
+    <aside class="aside" style="border: 2px solid; margin: 5px;">
+        <h4>빅데이터 관련 서적</h4>
+        <img src="관련 서적1.jpg"><br>
+        <a href="javascript:load('https://www.coupang.com/vp/products/20503659?itemId=80675205&vendorItemId=3521227250&src=1042503&spec=10304982&addtag=400&ctag=20503659&lptag=10304982I80675205&itime=20220605005655&pageType=PRODUCT&pageValue=20503659&wPcid=16371617616104066465887&wRef=&wTime=20220605005655&redirect=landing&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-NY4g-i8bVI64AKz5_XBAJJDNYba6AVS2HV_72375Cps0bimiYdEkYaAjwNEALw_wcB&campaignid=12207438463&adgroupid=115720946583&isAddedCart=')">구매 사이트</a>
+
+
+        <hr>
+        <h4>빅데이터 대표 직업</h4>
+        <a href="javascript:load('https://terms.naver.com/entry.naver?docId=5665210&cid=42117&categoryId=42117')">데이터 엔지니어</a><br>
+        <p>
+            데이터 엔지니어란 빅데이터 서이브 운영지치에 따라 제공 서비스를 모니터링하여 서비스의 가용성, 연속성 등을 관리하고서비스 변경 내역을 관리하는 직업니다.
+        </p>
+        <a href="javascript:load('https://terms.naver.com/entry.naver?docId=5665212&cid=42117&categoryId=42117')">데이터 분석가</a><br>
+        <p>
+            데이터 분석가란 단계별 데이터 모델링 및 데이터전환을 지원하며, 각종 데이터베이스 관련 교육을 실시하는 직업이다.
+        </p>
+        <a href="javascript:load('https://terms.naver.com/entry.naver?docId=3585974&cid=59277&categoryId=59282')">데이터 사이언티스트</a>
+        <p>
+            데이터 사이언티스트는 정보(데이터) 바다 즉 빅데이터에서 가치 있는 데이터를 추출하여 분석하는 직업이다.
+        </p>
+    </aside>
+    <br>
+    <footer class="footer" style="border: 2px solid; margin: 5px;">
+        <div>작성자 : 이만규, 목적 : 과제제출, 작성 날짜 : 2022-06-06</div>
+    </footer>
+
+    <p id="fixed">
+        <audio src="song1.mp3" controls loop></audio>
+        <script>
+            var current = new Date();
+            document.write("현재 시간 : " );
+            document.write(current.getHours(), "시, ");
+            document.write(current.getMinutes(), "분, ");
+            document.write(current.getSeconds(), "초");
+        </script>
+    </p>
+</body>
+</htmel>
